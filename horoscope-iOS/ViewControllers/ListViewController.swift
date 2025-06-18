@@ -9,7 +9,6 @@ import UIKit
 
 class ListViewController: UIViewController, UITableViewDataSource {
     
-    
     @IBOutlet weak var tableView: UITableView!
     
     var horoscopeList = Horoscope.horoscopeList
@@ -33,11 +32,11 @@ class ListViewController: UIViewController, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     let detailViewController = segue.destination as! DetailViewController
-        guard let selectedIndexPath = tableView.indexPathForSelectedRow else {
-            fatalError("The selected index path is nil")
-        }
-        detailViewController.horoscope = horoscopeList[selectedIndexPath.row]
+        let detailViewController = segue.destination as! DetailViewController
+        let IndexPath = tableView.indexPathForSelectedRow!
+        let horoscope = horoscopeList[IndexPath.row]
+        detailViewController.horoscope = horoscope
+        tableView.deselectRow(at: IndexPath, animated: true)
     }
 }
 
