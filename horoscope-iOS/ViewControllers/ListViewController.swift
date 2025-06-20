@@ -18,6 +18,19 @@ class ListViewController: UIViewController, UITableViewDataSource {
         // Do any additional setup after loading the view.
         
         tableView.dataSource = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,7 +41,6 @@ class ListViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HoroscopeCell", for: indexPath) as! HoroscopeViewCell
         cell.render(horoscope: horoscopeList[indexPath.row])
         return cell
-         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

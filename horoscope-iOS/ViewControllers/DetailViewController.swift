@@ -13,11 +13,14 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var HoroscopeNameLabel: UILabel!
     @IBOutlet weak var HoroscopeDatesLabel: UILabel!
     
+    @IBOutlet weak var favoriteMenu: UIBarButtonItem!
+    
     var horoscope: Horoscope!
+    var isFavorite: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.navigationItem.title = horoscope.name
         
@@ -25,9 +28,33 @@ class DetailViewController: UIViewController {
         HoroscopeNameLabel.text = horoscope.name
         HoroscopeDatesLabel.text = horoscope.dates
         horoscopeImageView.image = horoscope.getImage()
+        
+        isFavorite =
+        SessionManager.isFavoriteHoroscope(id: horoscope.id)
+        
+        setFavoriteImage()
+    }
+        
+        func setFavoriteImage(){
+            favoriteMenu.image = isFavorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        }
+        
+        
+    @IBAction func setFavorite(_ sender: Any){
+        isFavorite = !isFavorite
+        if isFavorite {
+            SessionManager.setFavoriteHoroscope(id: horoscope.id)
+        } else {
+            SessionManager.setFavoriteHoroscope(id: "")
+        }
+        setFavoriteImage()
+        
+    }
+        
+    @IBAction func share(_ sender: Any){
+        
     }
     
-
     /*
     // MARK: - Navigation
 
