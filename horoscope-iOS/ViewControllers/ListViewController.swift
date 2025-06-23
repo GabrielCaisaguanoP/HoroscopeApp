@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDataSource {
+class ListViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,6 +19,10 @@ class ListViewController: UIViewController, UITableViewDataSource {
         
         tableView.dataSource = self
         
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        self.navigationItem.searchController = searchController
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,10 +31,8 @@ class ListViewController: UIViewController, UITableViewDataSource {
         tableView.reloadData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
